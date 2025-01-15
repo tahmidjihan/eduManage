@@ -4,11 +4,14 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router';
 import Router from './Routes/Router.jsx';
+import UseCoursesProvider from './Routes/useCourses';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Router></Router>
-    </BrowserRouter>
+    <UseCoursesProvider>
+      <BrowserRouter>
+        <Router></Router>
+      </BrowserRouter>
+    </UseCoursesProvider>
   </StrictMode>
 );

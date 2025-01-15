@@ -1,0 +1,26 @@
+import React from 'react';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+function UseCoursesProvider({ children }) {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+}
+export function useCourses() {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['courses'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/courses');
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
+export default UseCoursesProvider;

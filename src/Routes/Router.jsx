@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router';
 import App from '../App';
 import Layout from './Layout';
-import Home from '../Pages/Home';
+import Home from '../Pages/Home.jsx';
 function Router() {
   return (
     <>

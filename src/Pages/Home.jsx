@@ -147,7 +147,7 @@ function Home() {
                         alt='Album'
                       />
                     </figure>
-                    <div className='card-body  max-w-md xl:max-w-xl'>
+                    <div className='card-body  max-w-md xl:max-w-xl mx-auto'>
                       <h2 className='card-title font-extrabold text-sm '>
                         {course.title}
                       </h2>
@@ -175,38 +175,7 @@ function Home() {
             </h1>
             <p className='text-center font-thin text-gray-600 max-w-md mx-auto'></p>
           </div>
-          <div className='md:h-[60vh] h-screen overflow-hidden'>
-            <Carousel>
-              {mostEnrolled.map((course) => (
-                <div key={course._id}>
-                  <div className='card lg:card-side mx-auto justify-around xl:max-w-[60vw] lg:max-w-[90vh] md:max-w-[70vh] bg-base-200 shadow-xl'>
-                    <figure>
-                      <img
-                        src={course.image}
-                        className='md:w-80 rounded-lg mt-4 lg:mt-0'
-                        alt='Album'
-                      />
-                    </figure>
-                    <div className='card-body  max-w-md xl:max-w-xl'>
-                      <h2 className='card-title font-extrabold text-sm '>
-                        {course.title}
-                      </h2>
-                      <p>{course.description}</p>
-                      <span className='text-md font-bold badge badge-primary'>
-                        Price: $ {course.price}
-                      </span>
-                      <span className='text-lg font-bold'>
-                        Enrolled : {course.enrolled}+
-                      </span>
-                      <div className='card-actions justify-end'>
-                        <button className='btn btn-primary'>Enroll now</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Carousel>
-          </div>
+          <div className='md:h-[60vh] h-screen overflow-hidden'></div>
         </div>
       </div>
     </>

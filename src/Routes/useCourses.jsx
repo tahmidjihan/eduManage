@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-function UseCoursesProvider({ children }) {
+function TanstackCustomHooksProvider({ children }) {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -23,4 +23,4 @@ export function useCourses() {
 
   return { data, isPending, error, status, refetch };
 }
-export default UseCoursesProvider;
+export default TanstackCustomHooksProvider;

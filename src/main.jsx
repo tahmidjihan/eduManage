@@ -4,14 +4,14 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router';
 import Router from './Routes/Router.jsx';
-import UseCoursesProvider from './Routes/useCourses';
+import TanstackCustomHooksProvider from './Routes/useCourses.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UseCoursesProvider>
+    <TanstackCustomHooksProvider>
       <BrowserRouter>
         <Router></Router>
       </BrowserRouter>
-    </UseCoursesProvider>
+    </TanstackCustomHooksProvider>
   </StrictMode>
 );

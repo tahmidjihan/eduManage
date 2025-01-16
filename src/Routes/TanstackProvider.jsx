@@ -12,6 +12,7 @@ function TanstackCustomHooksProvider({ children }) {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
+export default TanstackCustomHooksProvider;
 export function useCourses() {
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['courses'],
@@ -23,4 +24,14 @@ export function useCourses() {
 
   return { data, isPending, error, status, refetch };
 }
-export default TanstackCustomHooksProvider;
+export function useFeedback() {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['feedback'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/feedbacks');
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}

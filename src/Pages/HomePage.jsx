@@ -1,21 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeroCarousel from '../Components/HeroCarousel';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import { useCourses } from '../Routes/useCourses';
+import { useCourses, useFeedback } from '../Routes/TanstackProvider';
 import { Carousel } from 'flowbite-react';
+import { use } from 'react';
 
 function Home() {
-  const { data, isPending, error, status } = useCourses();
-  const [mostEnrolled, setMostEnrolled] = React.useState([]);
+  const { data: courseData, isPending: courseIsPending } = useCourses();
+  const { data: feedbackData, isPending: feedbackIsPending } = useFeedback();
+
+  const [mostEnrolled, setMostEnrolled] = useState([]);
+  const [feedback, setFeedback] = useState([]);
+
   useEffect(() => {
-    if (!data) {
+    if (!courseData) {
       return;
     }
-    const newData = data.sort((a, b) => b.enrolled - a.enrolled).slice(0, 3);
+    const newData = courseData
+      .sort((a, b) => b.enrolled - a.enrolled)
+      .slice(0, 3);
     setMostEnrolled(newData);
-  }, [data, isPending, error, status]);
-
+  }, [courseData, courseIsPending]);
+  useEffect(() => {
+    if (!feedbackData) {
+      return;
+    }
+    setFeedback(feedbackData);
+  });
   const animation = { duration: 10000, easing: (t) => t };
   const [sliderRef] = useKeenSlider({
     loop: true,
@@ -175,7 +187,32 @@ function Home() {
             </h1>
             <p className='text-center font-thin text-gray-600 max-w-md mx-auto'></p>
           </div>
-          <div className='md:h-[60vh] h-screen overflow-hidden'></div>
+          <div className='md:h-[60vh] h-screen overflow-hidden'>
+            <Carousel>
+              {feedback.map((item) => (
+                <div key={item._id}>
+                  <div className='card bg-base-100 w-96 shadow-xl mx-auto border-t-[16px] border-primary relative my-2'>
+                    <figure className='px-10 pt-10'>
+                      <img
+                        src={item.Image}
+                        alt='Shoes'
+                        className='rounded-xl'
+                      />
+                    </figure>
+                    <div className='card-body items-center text-center'>
+                      <h2 className='card-title font-extrabold text-xl'>
+                        {item.Name}
+                      </h2>
+                      <h2 className='card-title font-bold text-lg'>
+                        {item.title}
+                      </h2>
+                      <p>{item.Feedback_text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
     </>

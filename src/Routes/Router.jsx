@@ -5,14 +5,18 @@ import Home from '../Pages/HomePage';
 import Layout from './Layout';
 import Authentication from '../Pages/Authentication';
 import Courses from '../Pages/Courses';
+import Course from '../Pages/Course';
 function Router() {
   return (
     <>
       <Routes>
         <Route path='/' element={<Layout children={<Home />} />}></Route>
         <Route
-          path='/courses'
+          path='/classes'
           element={<Layout children={<Courses />} />}></Route>
+        <Route
+          path='/class/:id'
+          element={<Layout children={<Course />} />}></Route>
         <Route
           path='/login'
           element={

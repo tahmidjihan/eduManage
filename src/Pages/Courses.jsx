@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCourses } from '../Routes/TanstackProvider';
+import { Link } from 'react-router';
 
 function Courses() {
   const { data: courses } = useCourses();
@@ -29,7 +30,11 @@ function Courses() {
                     Enrolled {course.enrolled}+ Already
                   </span>
                   <div className='card-actions justify-end'>
-                    <button className='btn btn-primary'>Enroll</button>
+                    <Link
+                      to={`/class/${course._id}`}
+                      className='btn btn-primary'>
+                      Enroll
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,15 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { useAuth } from '../Routes/AuthProvider';
 
 function Navbar() {
+  const { user, logout } = useAuth();
+  function UserActions() {
+    return (
+      <>
+        <li className='dropdown dropdown-end'>
+          <button className='avatar btn'>
+            <div className='mask mask-squircle w-12 h-12'>
+              <img src={user?.photoURL} />
+            </div>
+          </button>
+          <ul className='menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+            <li>
+              <button className='btn btn-error' onClick={logout}>
+                Logout
+              </button>
+            </li>
+          </ul>
+        </li>
+      </>
+    );
+  }
   function Menu() {
     return (
       <>
         <li>
-          <a>Item 1</a>
+          <Link to='/'>Home</Link>
         </li>
         <li>
-          <a>Item 2</a>
+          <Link to='/courses'>Courses</Link>
         </li>
         <li>
           <a>Item 3</a>
@@ -50,9 +72,15 @@ function Navbar() {
         </ul>
       </div>
       <div className='navbar-end'>
-        <Link to='/signup' className='btn btn-primary'>
-          get started
-        </Link>
+        {user ? (
+          <UserActions />
+        ) : (
+          <>
+            <Link to='/login' className='btn btn-primary mr-2'>
+              Login
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

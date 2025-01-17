@@ -3,6 +3,7 @@ import auth from './firebase.config';
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
@@ -15,10 +16,12 @@ function AuthProvider({ children }) {
   const [authError, setAuthError] = React.useState(null);
   const [user, setUser] = React.useState(null);
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
     });
-    return unsubscribe();
+    return unsubscribe;
   });
   function login(email, password) {
     signInWithEmailAndPassword(auth, email, password)
@@ -48,8 +51,11 @@ function AuthProvider({ children }) {
       setUser(user);
     });
   }
+  function logout() {
+    auth.signOut().then(() => setUser(null));
+  }
 
-  const value = { user, login, signUp, authError, loginWithGoogle };
+  const value = { user, login, signUp, authError, loginWithGoogle, logout };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
 

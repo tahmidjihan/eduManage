@@ -191,7 +191,7 @@ function Home() {
             <Carousel>
               {feedback.map((item) => (
                 <div key={item._id}>
-                  <div className='card bg-base-100 w-96 shadow-xl mx-auto border-t-[16px] border-primary relative my-2'>
+                  <div className='card bg-base-100 w-80 shadow-xl mx-auto border-t-[16px] border-primary relative my-2'>
                     <figure className='px-10 pt-10'>
                       <img
                         src={item.Image}

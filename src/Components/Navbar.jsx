@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 function Navbar() {
   function Menu() {
@@ -49,7 +50,9 @@ function Navbar() {
         </ul>
       </div>
       <div className='navbar-end'>
-        <a className='btn'>Button</a>
+        <Link to='/signup' className='btn btn-primary'>
+          get started
+        </Link>
       </div>
     </div>
   );

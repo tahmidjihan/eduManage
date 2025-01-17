@@ -2,13 +2,20 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { FaEnvelope, FaEye, FaEyeSlash, FaImage, FaUser } from 'react-icons/fa';
 import { useAuth } from '../Routes/AuthProvider';
+import { useForm } from 'react-hook-form';
 
 function Authentication({ isLogin }) {
   const [showPassword, setShowPassword] = React.useState(false);
   const navigate = useNavigate();
   const [error, setError] = React.useState('');
   const { login, signUp, user, authError, loginWithGoogle } = useAuth();
-  function handleSubmit(e) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  function onSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
@@ -46,7 +53,9 @@ function Authentication({ isLogin }) {
             alt='login-image'
           />
         </div>
-        <form className='max-w-xl w-full p-6 mx-auto' onSubmit={handleSubmit}>
+        <form
+          className='max-w-xl w-full p-6 mx-auto'
+          onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-12'>
             <h3 className='text-gray-800 text-4xl font-extrabold'>
               {isLogin ? 'Sign in' : 'Sign up'}
@@ -67,7 +76,7 @@ function Authentication({ isLogin }) {
               <input
                 name='email'
                 type='email'
-                required
+                {...register('email', { required: true })}
                 className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                 placeholder='Enter email'
               />
@@ -75,6 +84,11 @@ function Authentication({ isLogin }) {
                 <FaEnvelope />
               </div>
             </div>
+            {errors.email && (
+              <span className='text-red-600 text-sm py-2'>
+                This field is required
+              </span>
+            )}
           </div>
           {!isLogin && (
             <>
@@ -86,7 +100,7 @@ function Authentication({ isLogin }) {
                   <input
                     name='username'
                     type='text'
-                    required
+                    {...register('username', { required: true })}
                     className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                     placeholder='Enter username'
                   />
@@ -94,6 +108,11 @@ function Authentication({ isLogin }) {
                     <FaUser />
                   </div>
                 </div>
+                {errors.username && (
+                  <span className='text-red-600 text-sm py-2'>
+                    This field is required
+                  </span>
+                )}
               </div>
               <div className='mt-8'>
                 <label className='text-gray-800 text-sm block mb-2'>
@@ -103,7 +122,7 @@ function Authentication({ isLogin }) {
                   <input
                     name='profileImage'
                     type='text'
-                    required
+                    {...register('profileImage', { required: true })}
                     className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                     placeholder='Enter profile image url'
                   />
@@ -111,6 +130,11 @@ function Authentication({ isLogin }) {
                     <FaImage />
                   </div>
                 </div>
+                {errors.profileImage && (
+                  <span className='text-red-600 text-sm py-2'>
+                    This field is required
+                  </span>
+                )}
               </div>
             </>
           )}
@@ -126,7 +150,7 @@ function Authentication({ isLogin }) {
                     setError('Password must be at least 6 characters long');
                   }
                 }}
-                required
+                {...register('password', { required: true })}
                 className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                 placeholder='Enter password'
               />
@@ -136,6 +160,11 @@ function Authentication({ isLogin }) {
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </div>
             </div>
+            {errors.password && (
+              <span className='text-red-600 text-sm py-2'>
+                This field is required
+              </span>
+            )}
           </div>
           <div className='mt-12'>
             <button

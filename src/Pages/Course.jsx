@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCourse } from '../Routes/TanstackProvider';
-import { useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
+import { useAuth } from '../Routes/AuthProvider';
 
 function Course() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data, isPending, error, refetch } = useCourse(id);
+  useEffect(() => {
+    if (user === null) {
+      navigate('/login');
+    }
+  }, [user]);
   return (
     <>
       <div className='container mx-auto'>
@@ -22,7 +30,9 @@ function Course() {
               Enrolled {data?.enrolled}+ Already
             </span>
 
-            <button className='btn btn-primary'>Pay to Enroll Now</button>
+            <Link to={`/enroll/${id}`} className='btn btn-primary'>
+              Pay to Enroll Now
+            </Link>
           </div>
         </div>
       </div>

@@ -14,11 +14,13 @@ export const useAuth = () => useContext(authContext);
 
 function AuthProvider({ children }) {
   const [authError, setAuthError] = React.useState(null);
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = React.useState(undefined);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+      } else {
+        setUser(null);
       }
     });
     return unsubscribe;

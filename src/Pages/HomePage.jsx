@@ -180,6 +180,29 @@ function Home() {
             </Carousel>
           </div>
         </div>
+        <div>
+          <div className='hero bg-base-200 min-h-screen'>
+            <div className='hero-content flex-col lg:flex-row'>
+              <img
+                src='/assets/teacher.png'
+                className='max-w-sm rounded-full shadow-2xl'
+              />
+              <div>
+                <h1 className='text-5xl font-bold'>
+                  Be a teacher In EduManages!
+                </h1>
+                <p className='py-6'>
+                  Join EduManages and elevate your teaching! Manage your
+                  courses, track student progress, and streamline class
+                  schedules with ease. With powerful tools at your fingertips,
+                  you can create a more organized and impactful learning
+                  experience. Start teaching with EduManages today!
+                </p>
+                <button className='btn btn-primary'>Get Started</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className='relative py-10'>
           <div className='mx-auto text-center py-5'>
             <h1 className='text-5xl font-extrabold text-gray-900'>

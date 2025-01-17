@@ -7,6 +7,7 @@ import Authentication from '../Pages/Authentication';
 import Courses from '../Pages/Courses';
 import Course from '../Pages/Course';
 import Enroll from '../Pages/Enroll';
+import BeTeacher from '../Pages/BeTeacher';
 function Router() {
   return (
     <>
@@ -15,6 +16,9 @@ function Router() {
         <Route
           path='/classes'
           element={<Layout children={<Courses />} />}></Route>
+        <Route
+          path='/beTeacher'
+          element={<Layout children={<BeTeacher />} />}></Route>
         <Route
           path='/class/:id'
           element={<Layout children={<Course />} />}></Route>

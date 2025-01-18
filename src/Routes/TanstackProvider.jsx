@@ -35,6 +35,17 @@ export function useCourse(id) {
 
   return { data, isPending, error, status, refetch };
 }
+export function useIsUser(email) {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['isUser'],
+
+    queryFn: async () => {
+      const response = await fetch(`http://localhost:3000/api/isUser/${email}`);
+      return response.json();
+    },
+  });
+  return { data, isPending, error, status, refetch };
+}
 export function useFeedback() {
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['feedback'],

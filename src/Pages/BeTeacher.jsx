@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../Routes/AuthProvider';
+import { useNavigate } from 'react-router';
 
 function BeTeacher() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,6 +19,12 @@ function BeTeacher() {
     const data = Object.fromEntries(formData);
     console.log(data);
   }
+
+  useEffect(() => {
+    if (user === null) {
+      navigate('/login');
+    }
+  }, [user]);
   return (
     <div className='hero bg-base-300 min-h-screen'>
       <div className='hero-content flex-col '>

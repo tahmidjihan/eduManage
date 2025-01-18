@@ -5,6 +5,7 @@ import 'keen-slider/keen-slider.min.css';
 import { useCourses, useFeedback } from '../Routes/TanstackProvider';
 import { Carousel } from 'flowbite-react';
 import { use } from 'react';
+import { Link } from 'react-router';
 
 function Home() {
   const { data: courseData, isPending: courseIsPending } = useCourses();
@@ -198,7 +199,9 @@ function Home() {
                   you can create a more organized and impactful learning
                   experience. Start teaching with EduManages today!
                 </p>
-                <button className='btn btn-primary'>Get Started</button>
+                <Link to='/beTeacher' className='btn btn-primary'>
+                  Be a Teacher
+                </Link>
               </div>
             </div>
           </div>

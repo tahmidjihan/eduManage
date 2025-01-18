@@ -28,7 +28,9 @@ export function useCourse(id) {
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['course', id],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:3000/api/courses/${id}`);
+      const response = await fetch(`http://localhost:3000/api/courses/${id}`, {
+        headers: { authorization: `${localStorage.getItem('token')}` },
+      });
       return response.json();
     },
   });
@@ -40,7 +42,10 @@ export function useIsUser(email) {
     queryKey: ['isUser'],
 
     queryFn: async () => {
-      const response = await fetch(`http://localhost:3000/api/isUser/${email}`);
+      const response = await fetch(
+        `http://localhost:3000/api/isUser/${email}`,
+        { headers: { authorization: `${localStorage.getItem('token')}` } }
+      );
       return response.json();
     },
   });

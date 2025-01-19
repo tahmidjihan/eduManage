@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router';
 import Router from './Routes/Router.jsx';
 import TanstackCustomHooksProvider from './Routes/TanstackProvider.jsx';
 import AuthProvider from './Routes/AuthProvider';
+import 'sweetalert2/src/sweetalert2.scss';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

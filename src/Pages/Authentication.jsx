@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { FaEnvelope, FaEye, FaEyeSlash, FaImage, FaUser } from 'react-icons/fa';
 import { useAuth } from '../Routes/AuthProvider';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 function Authentication({ isLogin }) {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -15,11 +16,10 @@ function Authentication({ isLogin }) {
     watch,
     formState: { errors },
   } = useForm();
-  function onSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+  function onSubmit(data) {
+    // console.log(data);
     if (authError) setError(authError);
+
     if (data.email && data.password && error === '') {
       if (isLogin) {
         login(data.email, data.password);
@@ -28,14 +28,20 @@ function Authentication({ isLogin }) {
       } else {
         if (data.name && data.image) {
           signUp(data.email, data.password, data.name, data.image);
-
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `Successfully signed ${isLogin ? 'in' : 'up'}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
           setError('');
         } else {
           setError('All fields are required');
         }
       }
     } else {
-      setError('All fields are required');
+      setError('All fields are required 2');
     }
   }
   useEffect(() => {
@@ -100,7 +106,7 @@ function Authentication({ isLogin }) {
                   <input
                     name='username'
                     type='text'
-                    {...register('username', { required: true })}
+                    {...register('name', { required: true })}
                     className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                     placeholder='Enter username'
                   />
@@ -120,9 +126,9 @@ function Authentication({ isLogin }) {
                 </label>
                 <div className='relative flex items-center'>
                   <input
-                    name='profileImage'
+                    name='image'
                     type='text'
-                    {...register('profileImage', { required: true })}
+                    {...register('image', { required: true })}
                     className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                     placeholder='Enter profile image url'
                   />

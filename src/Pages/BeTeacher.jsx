@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../Routes/AuthProvider';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { useUsers } from '../Routes/TanstackProvider';
 
 function BeTeacher() {
   const { user } = useAuth();
@@ -12,12 +16,41 @@ function BeTeacher() {
     watch,
     formState: { errors },
   } = useForm();
-
-  function onSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+  const { data, refetch } = useUsers(user?.email, {
+    enabled: !!user?.email,
+  });
+  useEffect(() => {
+    refetch();
+  }, [user?.email]);
+  function onSubmit(formData) {
+    if (data) {
+      const newData = {
+        ...data,
+        ...formData,
+        role: 'teacher',
+        status: 'pending',
+      }; // Merge newData
+      delete newData._id;
+      // console.log(newData);
+      axios
+        .patch(`http://localhost:3000/api/users/${data._id}`, newData, {
+          headers: { authorization: `${localStorage.getItem('token')}` },
+        })
+        .then((res) => {
+          // console.log(res);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Successfully applied to be a teacher',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+          setTimeout(() => {
+            navigate('/');
+          }, 1200);
+        });
+    }
   }
 
   useEffect(() => {
@@ -93,25 +126,29 @@ function BeTeacher() {
                 <label className='label'>
                   <span className='label-text'>Category</span>
                 </label>
-                <input
-                  type='text'
-                  name='category'
-                  placeholder='e. g. web development'
-                  className='input input-bordered'
+                <select
                   {...register('category', { required: true })}
-                />
-                {errors.category && (
-                  <span className='text-red-600 text-sm py-2'>
-                    This field is required
-                  </span>
-                )}
+                  className='select select-bordered w-full max-w-xs'>
+                  <option>Web Development</option>
+                  <option>Mathematics</option>
+                  <option>Science</option>
+                  <option>Languages</option>
+                  <option>Computer Science</option>
+                  <option>Business and Marketing</option>
+                  <option>Arts and Design</option>
+                  <option>Social Studies</option>
+                  <option>Music and Performing Arts</option>
+                  <option>Health and Physical Education</option>{' '}
+                </select>
               </div>
 
               <div className='form-control'>
                 <label className='label'>
                   <span className='label-text'>Profile Image</span>
                 </label>
-                <select className='select select-bordered w-full max-w-xs'>
+                <select
+                  {...register('level', { required: true })}
+                  className='select select-bordered w-full max-w-xs'>
                   <option>Beginner</option>
                   <option>Intermediate</option>
                   <option>Advanced</option>

@@ -21,15 +21,20 @@ function AuthProvider({ children }) {
   const isUser = useIsUser(user?.email, { enabled: !!user?.email });
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (
+        user &&
+        user?.email !== null &&
+        user?.displayName !== null &&
+        user?.photoURL !== null
+      ) {
         setUser(user);
         await isUser.refetch();
         const isUserRes = await isUser.refetch();
         const newUser = {
-          name: user.displayName,
-          email: user.email,
-          image: user.photoURL,
-          phone: user.phoneNumber,
+          name: user?.displayName,
+          email: user?.email,
+          image: user?.photoURL,
+          phone: user?.phoneNumber,
           role: 'student',
         };
         axios.post('http://localhost:3000/api/jwt', newUser).then((res) => {
@@ -42,7 +47,7 @@ function AuthProvider({ children }) {
               headers: { authorization: `${localStorage.getItem('token')}` },
             })
             .then((res) => {
-              console.log(res);
+              // console.log(res);
             });
           // console.log(isUserRes);
         } else {
@@ -54,7 +59,7 @@ function AuthProvider({ children }) {
       }
     });
     return unsubscribe;
-  }, [refetchUser]);
+  }, [refetchUser, user]);
   function login(email, password) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

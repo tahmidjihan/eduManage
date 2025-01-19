@@ -1,17 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaCreditCard } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../Routes/AuthProvider';
+import { useLocation, useNavigate, useParams } from 'react-router';
+import { useCourse } from '../Routes/TanstackProvider';
+import axios from 'axios';
 
 function Enroll() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const param = useParams();
+  // console.log(param);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  function onSubmit(data) {
-    console.log(data);
+  const { data, refetch } = useCourse(param.id);
+
+  // console.log(data);
+  function onSubmit() {
+    const enrollClass = {
+      name: user.displayName,
+      email: user.email,
+      courseId: param.id,
+      courseTitle: data.title,
+      courseBy: data.name,
+      courseImage: data.image,
+    };
+    delete data._id;
+    const newCourse = {
+      ...data,
+      enrolled: parseInt(data.enrolled) + 1,
+    };
+    // console.log(newCourse);
+    axios
+      .post('http://localhost:3000/api/enrolled', enrollClass, {
+        headers: { authorization: `${localStorage.getItem('token')}` },
+      })
+      .then((res) => {
+        axios.patch(
+          `http://localhost:3000/api/courses/${param.id}`,
+          newCourse,
+          {
+            headers: { authorization: `${localStorage.getItem('token')}` },
+          }
+        );
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
+  useEffect(() => {
+    if (user === null) {
+      navigate('/login');
+    }
+  }, [user]);
   return (
     <>
       {/* component */}

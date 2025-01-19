@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '../Routes/AuthProvider';
+import Profile from './../Pages/Profile';
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -13,7 +14,12 @@ function Navbar() {
               <img src={user?.photoURL} />
             </div>
           </button>
-          <ul className='menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+          <ul className='menu dropdown-content bg-base-100 gap-2 rounded-box z-[1] w-52 p-2 shadow'>
+            <li>
+              <Link to='/profile' className='btn btn-primary'>
+                Profile
+              </Link>
+            </li>
             <li>
               <button className='btn btn-error' onClick={logout}>
                 Logout

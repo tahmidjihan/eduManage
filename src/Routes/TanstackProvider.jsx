@@ -37,6 +37,22 @@ export function useCourse(id) {
 
   return { data, isPending, error, status, refetch };
 }
+export function useUsers(email) {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/users?email=${email}`,
+        {
+          headers: { authorization: `${localStorage.getItem('token')}` },
+        }
+      );
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
 export function useIsUser(email) {
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['isUser'],

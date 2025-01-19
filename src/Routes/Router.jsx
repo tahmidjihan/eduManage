@@ -8,6 +8,7 @@ import Courses from '../Pages/Courses';
 import Course from '../Pages/Course';
 import Enroll from '../Pages/Enroll';
 import BeTeacher from '../Pages/BeTeacher';
+import Profile from '../Pages/Profile';
 function Router() {
   return (
     <>
@@ -16,6 +17,9 @@ function Router() {
         <Route
           path='/classes'
           element={<Layout children={<Courses />} />}></Route>
+        <Route
+          path='/profile'
+          element={<Layout children={<Profile />} />}></Route>
         <Route
           path='/beTeacher'
           element={<Layout children={<BeTeacher />} />}></Route>

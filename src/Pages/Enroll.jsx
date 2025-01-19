@@ -9,10 +9,7 @@ function Enroll() {
     watch,
     formState: { errors },
   } = useForm();
-  function onSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+  function onSubmit(data) {
     console.log(data);
   }
   return (
@@ -106,7 +103,7 @@ function Enroll() {
             <div className='px-2 w-1/2'>
               <select
                 name='year'
-                {...register('year', { ...register('gender') })}
+                {...register('year', { required: true })}
                 className='form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer'>
                 <option value={2025}>2025</option>
                 <option value={2026}>2026</option>

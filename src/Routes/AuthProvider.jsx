@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import axios from 'axios';
-import { useIsUser } from './TanstackProvider';
+// import { getIsUser } from './TanstackProvider';
 
 const authContext = createContext();
 export const useAuth = () => useContext(authContext);
@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
   const [authError, setAuthError] = React.useState(null);
   const [user, setUser] = React.useState(undefined);
   const [refetchUser, setRefetchUser] = React.useState(0);
-  const isUser = useIsUser(user?.email, { enabled: !!user?.email });
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (
@@ -28,8 +28,7 @@ function AuthProvider({ children }) {
         user?.photoURL !== null
       ) {
         setUser(user);
-        await isUser.refetch();
-        const isUserRes = await isUser.refetch();
+
         const newUser = {
           name: user?.displayName,
           email: user?.email,
@@ -41,18 +40,13 @@ function AuthProvider({ children }) {
           localStorage.setItem('token', res.data.token);
         });
 
-        if (isUserRes.data?.isUser === false) {
-          axios
-            .post('http://localhost:3000/api/users', newUser, {
-              headers: { authorization: `${localStorage.getItem('token')}` },
-            })
-            .then((res) => {
-              // console.log(res);
-            });
-          // console.log(isUserRes);
-        } else {
-          // console.log('user already exist');
-        }
+        axios
+          .post('http://localhost:3000/api/users', newUser, {
+            headers: { authorization: `${localStorage.getItem('token')}` },
+          })
+          .then((res) => {
+            setRefetchUser(refetchUser + 1);
+          });
       } else {
         setUser(null);
         localStorage.removeItem('token');

@@ -1,0 +1,57 @@
+import React, { useEffect } from 'react';
+import { useMyEnrolledCourses } from '../Routes/TanstackProvider';
+
+function MyEnrollClasses() {
+  const [classes, setClasses] = React.useState([]);
+  const { data, refetch } = useMyEnrolledCourses();
+  useEffect(() => {
+    if (data) {
+      setClasses(data);
+    }
+  }, [data]);
+  return (
+    <>
+      <div className='container mx-auto'>
+        <div className='overflow-x-auto mx-auto'>
+          <table className='table'>
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {classes.map((cls) => (
+                <tr key={cls._id}>
+                  <td>
+                    <div className='flex items-center gap-3'>
+                      <div className='avatar'>
+                        <div className='mask mask-squircle h-12 w-12'>
+                          <img
+                            src={cls.courseImage}
+                            alt='Avatar Tailwind CSS Component'
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className='font-bold'>{cls.courseTitle}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td> by {cls.courseTitle}</td>
+                  <th>
+                    <button className='btn btn-primary btn-xs'>Continue</button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default MyEnrollClasses;

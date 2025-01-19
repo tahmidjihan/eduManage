@@ -4,6 +4,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
+import { useAuth } from './AuthProvider';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function TanstackCustomHooksProvider({ children }) {
@@ -44,6 +45,23 @@ export function useUsers(email) {
     queryFn: async () => {
       const response = await fetch(
         `http://localhost:3000/api/users?email=${email}`,
+        {
+          headers: { authorization: `${localStorage.getItem('token')}` },
+        }
+      );
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
+export function useMyEnrolledCourses() {
+  const { user } = useAuth();
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['myEnrolledCourses', user?.email],
+    queryFn: async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/enrolled?email=${user?.email}`,
         {
           headers: { authorization: `${localStorage.getItem('token')}` },
         }

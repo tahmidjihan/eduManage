@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { FaCreditCard } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../Routes/AuthProvider';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useCourse } from '../Routes/TanstackProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 function Enroll() {
   const { user } = useAuth();
@@ -49,7 +50,18 @@ function Enroll() {
         );
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Successfully applied to be a teacher',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+        setTimeout(() => {
+          navigate('/');
+        }, 1200);
       });
   }
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Sidebar } from 'flowbite-react';
-import { HiChartPie, HiUser } from 'react-icons/hi';
+import { HiBookOpen, HiChartPie, HiUser } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router';
+import MyEnrollClasses from './../Pages/MyEnrollClasses';
 function SideNav() {
   const navigate = useNavigate();
   return (
@@ -25,6 +26,13 @@ function SideNav() {
             }}
             icon={HiUser}>
             Profile
+          </Sidebar.Item>
+          <Sidebar.Item
+            onClick={() => {
+              navigate('/myEnrolledClasses');
+            }}
+            icon={HiBookOpen}>
+            My Enroll Classes
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

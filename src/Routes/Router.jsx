@@ -9,6 +9,8 @@ import Course from '../Pages/Course';
 import Enroll from '../Pages/Enroll';
 import BeTeacher from '../Pages/BeTeacher';
 import Profile from '../Pages/Profile';
+import Dashboard from '../Pages/Dashboard';
+import SideNav from '../Components/SideNav';
 function Router() {
   return (
     <>
@@ -17,9 +19,7 @@ function Router() {
         <Route
           path='/classes'
           element={<Layout children={<Courses />} />}></Route>
-        <Route
-          path='/profile'
-          element={<Layout children={<Profile />} />}></Route>
+
         <Route
           path='/beTeacher'
           element={<Layout children={<BeTeacher />} />}></Route>
@@ -38,6 +38,26 @@ function Router() {
           path='/signup'
           element={
             <Layout children={<Authentication isLogin={false} />} />
+          }></Route>
+        <Route
+          path='/dashboard'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <Dashboard />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/profile'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <Profile />
+              </div>
+            </Layout>
           }></Route>
       </Routes>
     </>

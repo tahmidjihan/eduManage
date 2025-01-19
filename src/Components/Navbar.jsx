@@ -40,7 +40,7 @@ function Navbar() {
           <Link to='/classes'>Classes</Link>
         </li>
         <li>
-          <a>Item 3</a>
+          <Link to='/dashboard'>dashboard</Link>
         </li>
       </>
     );

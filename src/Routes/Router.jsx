@@ -15,6 +15,8 @@ import MyEnrollClasses from './../Pages/MyEnrollClasses';
 import Users from '../Pages/Users';
 import Teacher from '../Pages/Teacher';
 import MyApplyTeacher from './../Pages/MyApplyTeacher';
+import UpdateClass from '../Pages/UpdateClass';
+import MyClasses from '../Pages/MyClasses';
 function Router() {
   return (
     <>
@@ -100,6 +102,36 @@ function Router() {
               <div className='flex gap-4 md:flex-row flex-col'>
                 <SideNav />
                 <Teacher />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/createClass'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <UpdateClass />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/updateClass/:id'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <UpdateClass isUpdate />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/myClasses'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <MyClasses />
               </div>
             </Layout>
           }></Route>

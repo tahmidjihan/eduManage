@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import auth from './firebase.config';
 import {
   createUserWithEmailAndPassword,
@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import axios from 'axios';
-import { useAdmin, useUsers } from './TanstackProvider';
+import { useAdmin, useTeachers, useUsers } from './TanstackProvider';
 import { use } from 'react';
 // import { getIsUser } from './TanstackProvider';
 
@@ -105,18 +105,29 @@ function AuthProvider({ children }) {
     }, [admin, refetchAdmin]);
     useEffect(() => {
       if (Array.isArray(admin)) {
-        admin.map((user) => {
-          if (user.email === email) {
-            // console.log(true);
-            setIsAdmin(true);
-          } else {
-            // console.log(false);
-            setIsAdmin(false);
-          }
-        });
+        // console.log(admin);
+        const check = admin.some((user) => user.email === email);
+        setIsAdmin(check);
       }
     });
+    // console.log(isAdmin);
     return isAdmin;
+  }
+  function isTeachers() {
+    const { user } = useAuth();
+    const email = user?.email;
+    const [isTeachers, setIsTeacher] = useState();
+    const { teachers, refetchTeachers } = useTeachers();
+    useEffect(() => {
+      refetchTeachers;
+    }, [user, teachers, refetchTeachers]);
+    useEffect(() => {
+      if (Array.isArray(teachers)) {
+        const check = teachers.some((teacher) => teacher.email === email);
+        setIsTeacher(check);
+      }
+    });
+    return isTeachers;
   }
 
   const value = {
@@ -127,6 +138,7 @@ function AuthProvider({ children }) {
     loginWithGoogle,
     logout,
     isAdmin,
+    isTeachers,
   };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }

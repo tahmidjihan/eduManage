@@ -26,6 +26,8 @@ export function useCourses() {
   return { data, isPending, error, status, refetch };
 }
 export function useCourse(id) {
+  if (!id || id === '' || id === undefined)
+    return { data: [], refetch: () => {} };
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['course', id],
     queryFn: async () => {
@@ -38,7 +40,24 @@ export function useCourse(id) {
 
   return { data, isPending, error, status, refetch };
 }
+export function useCoursesByEmail(email) {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['courses', email],
+    queryFn: async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/courses/email/${email}`,
+        {
+          headers: { authorization: `${localStorage.getItem('token')}` },
+        }
+      );
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
 export function useUsers(email) {
+  if (!email) return;
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['users'],
 
@@ -82,7 +101,7 @@ export function useAdmin() {
   return { admin: data, refetchAdmin: refetch };
 }
 export function useTeachers() {
-  const { data, isPending, error, status, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['teachers'],
     queryFn: async () => {
       const response = await fetch('http://localhost:3000/api/users/teacher', {
@@ -91,8 +110,8 @@ export function useTeachers() {
       return response.json();
     },
   });
-
-  return { data, isPending, error, status, refetch };
+  // console.log(data);
+  return { teachers: data, refetchTeacher: refetch };
 }
 export function useMyEnrolledCourses() {
   const { user } = useAuth();

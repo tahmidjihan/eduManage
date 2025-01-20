@@ -5,19 +5,21 @@ import {
   HiChartPie,
   HiIdentification,
   HiPencilAlt,
+  HiPlusCircle,
   HiUser,
   HiUsers,
 } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router';
-
 import { useAuth } from '../Routes/AuthProvider';
 import Teacher from './../Pages/Teacher';
 
 function SideNav() {
   const navigate = useNavigate();
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, isTeachers } = useAuth();
   // console.log(isAdmin());
   const admin = isAdmin();
+  const teacher = isTeachers();
+
   useEffect(() => {
     if (user === null) {
       navigate('/');
@@ -47,6 +49,52 @@ function SideNav() {
       </>
     );
   }
+  function StudentMenu() {
+    return (
+      <>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/myEnrolledClasses');
+          }}
+          icon={HiBookOpen}>
+          My Enroll Classes
+        </Sidebar.Item>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/appliedTeacher');
+          }}
+          icon={HiPencilAlt}>
+          My Apply Teacher
+        </Sidebar.Item>
+      </>
+    );
+  }
+  function TeacherMenu() {
+    // console.log(teacher);
+    if (!teacher) {
+      return;
+    }
+    return (
+      <>
+        <h3 className='text-white text-xl my-2 font-bold'>Teacher</h3>
+
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/myClasses');
+          }}
+          icon={HiBookOpen}>
+          My Classes
+        </Sidebar.Item>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/createClass');
+          }}
+          icon={HiPlusCircle}>
+          Add Class
+        </Sidebar.Item>
+      </>
+    );
+  }
 
   return (
     <Sidebar
@@ -62,27 +110,14 @@ function SideNav() {
             icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
-
+          {!isTeachers ? <StudentMenu /> : ''}
+          {isTeachers ? <TeacherMenu /> : ''}
           <Sidebar.Item
             onClick={() => {
               navigate('/profile');
             }}
             icon={HiUser}>
             Profile
-          </Sidebar.Item>
-          <Sidebar.Item
-            onClick={() => {
-              navigate('/myEnrolledClasses');
-            }}
-            icon={HiBookOpen}>
-            My Enroll Classes
-          </Sidebar.Item>
-          <Sidebar.Item
-            onClick={() => {
-              navigate('/appliedTeacher');
-            }}
-            icon={HiPencilAlt}>
-            My Apply Teacher
           </Sidebar.Item>
 
           {admin == true ? <AdminMenu /> : ''}

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../Routes/AuthProvider';
 import { useAllUsers, useUsers } from '../Routes/TanstackProvider';
-import { set } from 'react-hook-form';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import axios from 'axios';
 
 function Users() {
   const [stat, setStat] = React.useState('loading..');
@@ -32,6 +33,7 @@ function Users() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>make admin</th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +47,42 @@ function Users() {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>
+                  <td>
+                    <span
+                      className='btn btn-primary btn-xs'
+                      onClick={() => {
+                        if (user.role === 'admin') {
+                          return;
+                        }
+                        axios
+                          .patch(
+                            `http://localhost:3000/api/users/${user._id}`,
+                            {
+                              role: 'admin',
+                              status: 'accepted',
+                            },
+                            {
+                              headers: {
+                                authorization: `${localStorage.getItem(
+                                  'token'
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            refetch();
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'success',
+                              title: `Successfully made ${user.name} an admin`,
+                              showConfirmButton: false,
+                              timer: 1500,
+                            });
+                          });
+                      }}>
+                      {user.role === 'admin' ? 'already admin' : 'make admin'}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

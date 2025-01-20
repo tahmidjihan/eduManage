@@ -13,12 +13,13 @@ function Teacher() {
   const navigate = useNavigate();
   const { user, isAdmin } = useAuth();
 
-  const { data, refetch } = useTeachers();
+  const { teachers, refetchTeachers } = useTeachers();
+  // console.log(teachers);
   useEffect(() => {
-    if (Array.isArray(data)) {
-      setTeacher(data);
+    if (Array.isArray(teachers)) {
+      setTeacher(teachers);
     }
-  }, [data]);
+  }, [teachers]);
   const admin = isAdmin();
 
   return (
@@ -54,14 +55,14 @@ function Teacher() {
                       onClick={() => {
                         // console.log(user?._id + ' clicked to approve');
                         if (
-                          user.status == 'confirmed' ||
+                          user.status == 'accepted' ||
                           user.status == 'rejected'
                         )
                           return;
 
                         const newUser = {
                           role: 'teacher',
-                          status: 'confirmed',
+                          status: 'accepted',
                         };
 
                         axios

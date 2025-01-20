@@ -1,23 +1,32 @@
 import React, { useEffect } from 'react';
 import { Sidebar } from 'flowbite-react';
-import { HiBookOpen, HiChartPie, HiUser, HiUsers } from 'react-icons/hi';
+import {
+  HiBookOpen,
+  HiChartPie,
+  HiIdentification,
+  HiUser,
+  HiUsers,
+} from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router';
-import { useUsers } from '../Routes/TanstackProvider';
+
 import { useAuth } from '../Routes/AuthProvider';
-import { set } from 'react-hook-form';
+import Teacher from './../Pages/Teacher';
+
 function SideNav() {
   const navigate = useNavigate();
   const { user, isAdmin } = useAuth();
   // console.log(isAdmin());
-
+  const admin = isAdmin();
   useEffect(() => {
     if (user === null) {
       navigate('/');
     }
   }, [user]);
+
   function AdminMenu() {
     return (
       <>
+        <h3 className='text-white text-xl my-2 font-bold'>Admin</h3>
         <Sidebar.Item
           onClick={() => {
             navigate('/users');
@@ -25,6 +34,14 @@ function SideNav() {
           href='#'
           icon={HiUsers}>
           Users
+        </Sidebar.Item>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/teachers');
+          }}
+          href='#'
+          icon={HiIdentification}>
+          Teacher
         </Sidebar.Item>
       </>
     );
@@ -59,7 +76,7 @@ function SideNav() {
             icon={HiBookOpen}>
             My Enroll Classes
           </Sidebar.Item>
-          {isAdmin && <AdminMenu />}
+          {admin == true ? <AdminMenu /> : ''}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

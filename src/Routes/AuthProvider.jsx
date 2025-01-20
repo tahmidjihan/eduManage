@@ -9,7 +9,8 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import axios from 'axios';
-import { useUsers } from './TanstackProvider';
+import { useAdmin, useUsers } from './TanstackProvider';
+import { use } from 'react';
 // import { getIsUser } from './TanstackProvider';
 
 const authContext = createContext();
@@ -95,20 +96,27 @@ function AuthProvider({ children }) {
     });
   }
   function isAdmin() {
-    const [userData, setUserData] = React.useState(null);
     const { user } = useAuth();
-    // if (!user.email) return;
-    const { data, isPending, error, refetch } = useUsers(user?.email, {
-      enabled: !!user?.email,
-    });
+    const email = user?.email;
+    const [isAdmin, setIsAdmin] = React.useState(undefined);
+    const { admin, refetchAdmin } = useAdmin();
     useEffect(() => {
-      refetch(user?.email);
-    }, [user?.email]);
-    if (data?.role === 'admin') {
-      return true;
-    } else {
-      return false;
-    }
+      refetchAdmin();
+    }, [admin, refetchAdmin]);
+    useEffect(() => {
+      if (Array.isArray(admin)) {
+        admin.map((user) => {
+          if (user.email === email) {
+            // console.log(true);
+            setIsAdmin(true);
+          } else {
+            // console.log(false);
+            setIsAdmin(false);
+          }
+        });
+      }
+    });
+    return isAdmin;
   }
 
   const value = {

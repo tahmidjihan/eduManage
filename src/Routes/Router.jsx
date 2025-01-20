@@ -13,6 +13,7 @@ import Dashboard from '../Pages/Dashboard';
 import SideNav from '../Components/SideNav';
 import MyEnrollClasses from './../Pages/MyEnrollClasses';
 import Users from '../Pages/Users';
+import Teacher from '../Pages/Teacher';
 function Router() {
   return (
     <>
@@ -78,6 +79,16 @@ function Router() {
               <div className='flex gap-4 md:flex-row flex-col'>
                 <SideNav />
                 <Users />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/teachers'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <Teacher />
               </div>
             </Layout>
           }></Route>

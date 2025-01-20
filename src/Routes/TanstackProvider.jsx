@@ -68,6 +68,32 @@ export function useAllUsers() {
 
   return { data, isPending, error, status, refetch };
 }
+export function useAdmin() {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['admin'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/users/admin', {
+        headers: { authorization: `${localStorage.getItem('token')}` },
+      });
+      return response.json();
+    },
+  });
+
+  return { admin: data, refetchAdmin: refetch };
+}
+export function useTeachers() {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['teachers'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/users/teacher', {
+        headers: { authorization: `${localStorage.getItem('token')}` },
+      });
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
 export function useMyEnrolledCourses() {
   const { user } = useAuth();
   const { data, isPending, error, status, refetch } = useQuery({

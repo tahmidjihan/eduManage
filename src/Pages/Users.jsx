@@ -7,10 +7,11 @@ import { set } from 'react-hook-form';
 function Users() {
   const [stat, setStat] = React.useState('loading..');
   const [users, setUsers] = React.useState([]);
+  // const [adminState, setAdminState] = React.useState();
   const navigate = useNavigate();
   const { user, isAdmin } = useAuth();
   //   console.log(isAdmin());
-  const { data, isPending, error, refetch } = useAllUsers();
+  const { data, refetch } = useAllUsers();
   useEffect(() => {
     if (Array.isArray(data)) {
       //   console.log(data);
@@ -19,33 +20,36 @@ function Users() {
   }, [data]);
   const admin = isAdmin();
 
-  useEffect(() => {
-    if (admin === false) {
-      return;
-    }
-  });
   return (
     <>
       <div className='overflow-x-auto'>
-        <table className='table'>
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+        {admin == true && (
+          <table className='table'>
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <th>
+                    <figure className='avatar mask mask-squircle w-24 h-24'>
+                      <img src={user.image} alt='' />
+                    </figure>
+                  </th>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );

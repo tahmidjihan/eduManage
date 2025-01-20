@@ -39,6 +39,11 @@ function Teacher() {
             <tbody key={teacher}>
               {teacher?.map((user) => (
                 <tr key={user?._id}>
+                  <td>
+                    <figure className='avatar mask mask-squircle w-16 h-16'>
+                      <img src={user.image} alt='' />
+                    </figure>
+                  </td>
                   <td>{user?.name}</td>
                   <td>{user?.email}</td>
                   <td>{user?.role}</td>

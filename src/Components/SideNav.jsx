@@ -4,6 +4,7 @@ import {
   HiBookOpen,
   HiChartPie,
   HiIdentification,
+  HiPencilAlt,
   HiUser,
   HiUsers,
 } from 'react-icons/hi';
@@ -76,6 +77,14 @@ function SideNav() {
             icon={HiBookOpen}>
             My Enroll Classes
           </Sidebar.Item>
+          <Sidebar.Item
+            onClick={() => {
+              navigate('/appliedTeacher');
+            }}
+            icon={HiPencilAlt}>
+            My Apply Teacher
+          </Sidebar.Item>
+
           {admin == true ? <AdminMenu /> : ''}
         </Sidebar.ItemGroup>
       </Sidebar.Items>

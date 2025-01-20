@@ -14,6 +14,7 @@ import SideNav from '../Components/SideNav';
 import MyEnrollClasses from './../Pages/MyEnrollClasses';
 import Users from '../Pages/Users';
 import Teacher from '../Pages/Teacher';
+import MyApplyTeacher from './../Pages/MyApplyTeacher';
 function Router() {
   return (
     <>
@@ -59,6 +60,16 @@ function Router() {
               <div className='flex gap-4 md:flex-row flex-col'>
                 <SideNav />
                 <Profile />
+              </div>
+            </Layout>
+          }></Route>
+        <Route
+          path='/appliedTeacher'
+          element={
+            <Layout>
+              <div className='flex gap-4 md:flex-row flex-col'>
+                <SideNav />
+                <MyApplyTeacher />
               </div>
             </Layout>
           }></Route>

@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Sidebar } from 'flowbite-react';
-import { HiBookOpen, HiChartPie, HiUser } from 'react-icons/hi';
+import { HiBookOpen, HiChartPie, HiUser, HiUsers } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router';
-import MyEnrollClasses from './../Pages/MyEnrollClasses';
+import { useUsers } from '../Routes/TanstackProvider';
+import { useAuth } from '../Routes/AuthProvider';
+import { set } from 'react-hook-form';
 function SideNav() {
   const navigate = useNavigate();
+  const { user, isAdmin } = useAuth();
+  // console.log(isAdmin());
+
+  useEffect(() => {
+    if (user === null) {
+      navigate('/');
+    }
+  }, [user]);
+  function AdminMenu() {
+    return (
+      <>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/users');
+          }}
+          href='#'
+          icon={HiUsers}>
+          Users
+        </Sidebar.Item>
+      </>
+    );
+  }
+
   return (
     <Sidebar
       aria-label='Default sidebar example'
@@ -34,6 +59,7 @@ function SideNav() {
             icon={HiBookOpen}>
             My Enroll Classes
           </Sidebar.Item>
+          {isAdmin && <AdminMenu />}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

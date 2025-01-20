@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import axios from 'axios';
+import { useUsers } from './TanstackProvider';
 // import { getIsUser } from './TanstackProvider';
 
 const authContext = createContext();
@@ -18,6 +19,7 @@ function AuthProvider({ children }) {
   const [authError, setAuthError] = React.useState(null);
   const [user, setUser] = React.useState(undefined);
   const [refetchUser, setRefetchUser] = React.useState(0);
+  // const [isUser, setIsUser] = React.useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -28,7 +30,6 @@ function AuthProvider({ children }) {
         user?.photoURL !== null
       ) {
         setUser(user);
-
         const newUser = {
           name: user?.displayName,
           email: user?.email,
@@ -93,8 +94,32 @@ function AuthProvider({ children }) {
       setRefetchUser(refetchUser + 1);
     });
   }
+  function isAdmin() {
+    const [userData, setUserData] = React.useState(null);
+    const { user } = useAuth();
+    // if (!user.email) return;
+    const { data, isPending, error, refetch } = useUsers(user?.email, {
+      enabled: !!user?.email,
+    });
+    useEffect(() => {
+      refetch(user?.email);
+    }, [user?.email]);
+    if (data?.role === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  const value = { user, login, signUp, authError, loginWithGoogle, logout };
+  const value = {
+    user,
+    login,
+    signUp,
+    authError,
+    loginWithGoogle,
+    logout,
+    isAdmin,
+  };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
 

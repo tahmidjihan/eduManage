@@ -55,6 +55,19 @@ export function useUsers(email) {
 
   return { data, isPending, error, status, refetch };
 }
+export function useAllUsers() {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/users', {
+        headers: { authorization: `${localStorage.getItem('token')}` },
+      });
+      return response.json();
+    },
+  });
+
+  return { data, isPending, error, status, refetch };
+}
 export function useMyEnrolledCourses() {
   const { user } = useAuth();
   const { data, isPending, error, status, refetch } = useQuery({

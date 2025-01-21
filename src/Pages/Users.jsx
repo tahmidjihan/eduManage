@@ -72,7 +72,7 @@ function Users() {
                           }
                           axios
                             .patch(
-                              `http://localhost:3000/api/users/${user._id}`,
+                              `https://edumng.vercel.app/api/users/${user._id}`,
                               {
                                 role: 'admin',
                                 status: 'accepted',

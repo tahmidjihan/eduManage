@@ -41,7 +41,7 @@ function MyClass() {
     formData.courseId = id;
     formData.userEmail = user.email;
     axios
-      .post('http://localhost:3000/api/assignmentSubmit', formData, {
+      .post('https://edumng.vercel.app/api/assignmentSubmit', formData, {
         headers: {
           authorization: `${localStorage.getItem('token')}`,
         },
@@ -77,7 +77,7 @@ function MyClass() {
 
     console.log(feedbackData);
     axios
-      .post('http://localhost:3000/api/feedbacks', feedbackData, {
+      .post('https://edumng.vercel.app/api/feedbacks', feedbackData, {
         headers: {
           authorization: `${localStorage.getItem('token')}`,
         },

@@ -67,7 +67,7 @@ function Teacher() {
 
                         axios
                           .patch(
-                            `http://localhost:3000/api/users/${user._id}`,
+                            `https://edumng.vercel.app/api/users/${user._id}`,
                             newUser,
                             {
                               headers: {
@@ -105,7 +105,7 @@ function Teacher() {
 
                         axios
                           .patch(
-                            `http://localhost:3000/api/users/${user._id}`,
+                            `https://edumng.vercel.app/api/users/${user._id}`,
                             newUser,
                             {
                               headers: {

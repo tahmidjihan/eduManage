@@ -39,13 +39,13 @@ function AuthProvider({ children }) {
           role: 'student',
         };
         axios
-          .post('http://localhost:3000/api/jwt', newUser)
+          .post('https://edumng.vercel.app/api/jwt', newUser)
           .then((res) => {
             localStorage.setItem('token', res.data.token);
           })
           .then(() => {
             axios
-              .post('http://localhost:3000/api/users', newUser, {
+              .post('https://edumng.vercel.app/api/users', newUser, {
                 headers: { authorization: `${localStorage.getItem('token')}` },
               })
               .then((res) => {

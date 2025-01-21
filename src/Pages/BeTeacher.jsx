@@ -33,7 +33,7 @@ function BeTeacher() {
       delete newData._id;
       // console.log(newData);
       axios
-        .patch(`http://localhost:3000/api/users/${data._id}`, newData, {
+        .patch(`https://edumng.vercel.app/api/users/${data._id}`, newData, {
           headers: { authorization: `${localStorage.getItem('token')}` },
         })
         .then((res) => {

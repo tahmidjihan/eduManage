@@ -32,7 +32,7 @@ function UpdateClass({ isUpdate }) {
     console.log(formData);
     if (!isUpdate) {
       axios
-        .post('http://localhost:3000/api/courses', formData, {
+        .post('https://edumng.vercel.app/api/courses', formData, {
           headers: { authorization: `${localStorage.getItem('token')}` },
         })
         .then((res) => {
@@ -53,7 +53,7 @@ function UpdateClass({ isUpdate }) {
         });
     } else {
       axios
-        .patch(`http://localhost:3000/api/courses/${param?.id}`, formData, {
+        .patch(`https://edumng.vercel.app/api/courses/${param?.id}`, formData, {
           headers: { authorization: `${localStorage.getItem('token')}` },
         })
         .then((res) => {

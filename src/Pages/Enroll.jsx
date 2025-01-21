@@ -37,12 +37,12 @@ function Enroll() {
     };
     // console.log(newCourse);
     axios
-      .post('http://localhost:3000/api/enrolled', enrollClass, {
+      .post('https://edumng.vercel.app/api/enrolled', enrollClass, {
         headers: { authorization: `${localStorage.getItem('token')}` },
       })
       .then((res) => {
         axios.patch(
-          `http://localhost:3000/api/courses/${param.id}`,
+          `https://edumng.vercel.app/api/courses/${param.id}`,
           newCourse,
           {
             headers: { authorization: `${localStorage.getItem('token')}` },

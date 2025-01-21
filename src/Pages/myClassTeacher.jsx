@@ -31,7 +31,7 @@ function MyClassTeacher() {
     formData.courseId = id;
     // console.log(formData);
     axios
-      .post('http://localhost:3000/api/assignments', formData, {
+      .post('https://edumng.vercel.app/api/assignments', formData, {
         headers: { authorization: `${localStorage.getItem('token')}` },
       })
       .then((res) => {

@@ -56,7 +56,7 @@ function MyClasses() {
                       onClick={() => {
                         axios
                           .delete(
-                            `http://localhost:3000/api/courses/${course._id}`,
+                            `https://edumng.vercel.app/api/courses/${course._id}`,
                             {
                               headers: {
                                 authorization: `${localStorage.getItem(

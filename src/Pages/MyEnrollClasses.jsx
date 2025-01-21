@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useMyEnrolledCourses } from '../Routes/TanstackProvider';
+import { Link } from 'react-router';
 
 function MyEnrollClasses() {
   const [classes, setClasses] = React.useState([]);
@@ -42,7 +43,11 @@ function MyEnrollClasses() {
                   </td>
                   <td> by {cls.courseTitle}</td>
                   <th>
-                    <button className='btn btn-primary btn-xs'>Continue</button>
+                    <Link
+                      to={`/myClass/${cls._id}`}
+                      className='btn btn-primary btn-xs'>
+                      Continue
+                    </Link>
                   </th>
                 </tr>
               ))}

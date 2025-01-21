@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Sidebar } from 'flowbite-react';
 import {
+  HiAcademicCap,
   HiBookOpen,
   HiChartPie,
   HiIdentification,
@@ -45,6 +46,13 @@ function SideNav() {
           href='#'
           icon={HiIdentification}>
           Teacher
+        </Sidebar.Item>
+        <Sidebar.Item
+          onClick={() => {
+            navigate('/allClasses');
+          }}
+          icon={HiAcademicCap}>
+          Add Class
         </Sidebar.Item>
       </>
     );
@@ -110,7 +118,7 @@ function SideNav() {
             icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
-          {!isTeachers ? <StudentMenu /> : ''}
+          <StudentMenu />
           {isTeachers ? <TeacherMenu /> : ''}
           <Sidebar.Item
             onClick={() => {

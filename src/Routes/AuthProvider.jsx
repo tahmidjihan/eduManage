@@ -38,16 +38,19 @@ function AuthProvider({ children }) {
           phone: user?.phoneNumber,
           role: 'student',
         };
-        axios.post('http://localhost:3000/api/jwt', newUser).then((res) => {
-          localStorage.setItem('token', res.data.token);
-        });
-
         axios
-          .post('http://localhost:3000/api/users', newUser, {
-            headers: { authorization: `${localStorage.getItem('token')}` },
-          })
+          .post('http://localhost:3000/api/jwt', newUser)
           .then((res) => {
-            setRefetchUser(refetchUser + 1);
+            localStorage.setItem('token', res.data.token);
+          })
+          .then(() => {
+            axios
+              .post('http://localhost:3000/api/users', newUser, {
+                headers: { authorization: `${localStorage.getItem('token')}` },
+              })
+              .then((res) => {
+                setRefetchUser(refetchUser + 1);
+              });
           });
       } else {
         setUser(null);

@@ -28,6 +28,7 @@ function UpdateClass({ isUpdate }) {
 
   function onSubmit(formData) {
     formData.status = 'pending';
+    formData.enrolled = 0;
     console.log(formData);
     if (!isUpdate) {
       axios

@@ -4,7 +4,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { useCourses, useFeedback } from '../Routes/TanstackProvider';
 import { Carousel } from 'flowbite-react';
-import { use } from 'react';
+import ReactStars from 'react-rating-stars-component';
 import { Link } from 'react-router';
 
 function Home() {
@@ -220,19 +220,27 @@ function Home() {
                   <div className='card bg-base-100 w-80 shadow-xl mx-auto border-t-[16px] border-primary relative my-2'>
                     <figure className='px-10 pt-10'>
                       <img
-                        src={item.Image}
+                        src={item.userProfile}
                         alt='Shoes'
                         className='rounded-xl'
                       />
                     </figure>
                     <div className='card-body items-center text-center'>
                       <h2 className='card-title font-extrabold text-xl'>
-                        {item.Name}
+                        {item.userId}
                       </h2>
-                      <h2 className='card-title font-bold text-lg'>
-                        {item.title}
+                      <h2 className='card-title font-thin text-lg'>
+                        {item.feedback}
                       </h2>
-                      <p>{item.Feedback_text}</p>
+                      <div className='flex justify-center'>
+                        <ReactStars
+                          count={5}
+                          value={parseInt(item.rating)}
+                          size={24}
+                          activeColor='#ffd700'
+                          edit={false}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

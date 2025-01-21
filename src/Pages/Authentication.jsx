@@ -150,13 +150,7 @@ function Authentication({ isLogin }) {
               <input
                 name='password'
                 type={showPassword ? 'text' : 'password'}
-                onChange={(e) => {
-                  setError('');
-                  if (e.target.value.length < 6) {
-                    setError('Password must be at least 6 characters long');
-                  }
-                }}
-                {...register('password', { required: true })}
+                {...register('password', { required: true, minLength: 6 })}
                 className='w-full text-sm text-gray-800 border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none'
                 placeholder='Enter password'
               />

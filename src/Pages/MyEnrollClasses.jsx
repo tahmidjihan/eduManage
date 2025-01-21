@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 function MyEnrollClasses() {
   const [classes, setClasses] = React.useState([]);
   const { data, refetch } = useMyEnrolledCourses();
+  console.log(data);
   useEffect(() => {
     if (data) {
       setClasses(data);
@@ -44,7 +45,7 @@ function MyEnrollClasses() {
                   <td> by {cls.courseTitle}</td>
                   <th>
                     <Link
-                      to={`/myClass/${cls._id}`}
+                      to={`/myClass/${cls.courseId}`}
                       className='btn btn-primary btn-xs'>
                       Continue
                     </Link>

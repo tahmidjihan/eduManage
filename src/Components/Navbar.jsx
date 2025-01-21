@@ -70,7 +70,7 @@ function Navbar() {
             <Menu />
           </ul>
         </div>
-        <a className='btn btn-ghost text-xl font-bold'>EduManage </a>
+        <a className='btn btn-primary text-xl font-bold'>EduManage </a>
       </div>
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>

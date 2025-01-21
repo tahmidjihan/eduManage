@@ -80,7 +80,7 @@ function Teacher() {
                           )
                           .then((res) => {
                             console.log(res);
-                            refetch();
+                            refetchTeachers();
                             Swal.fire({
                               position: 'top-end',
                               icon: 'success',
@@ -118,7 +118,7 @@ function Teacher() {
                           )
                           .then((res) => {
                             console.log(res);
-                            refetch();
+                            refetchTeachers();
                             Swal.fire({
                               position: 'top-end',
                               icon: 'success',

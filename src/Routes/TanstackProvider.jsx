@@ -5,6 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { useAuth } from './AuthProvider';
+import axios from 'axios';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function TanstackCustomHooksProvider({ children }) {
@@ -95,27 +96,20 @@ export function useAssignments(id) {
 
   return { data, isPending, error, status, refetch };
 }
-// export function useAssignmentCount(id) {
-//   if (!id || id === '' || id === undefined) {
-//     return { data: [], refetch: () => {} };
-//   }
+export function useCourseStat(id) {
+  const { data, isPending, error, status, refetch } = useQuery({
+    queryKey: ['courseStat', id],
+    queryFn: async () => {
+      const response = await axios.get(
+        `http://localhost:3000/api/courses/stats/${id}`
+      );
+      return response.data; // Axios already parses JSON
+    },
+  });
+  // console.log(data);
+  return { stats: data, statsRefetch: refetch };
+}
 
-//   const { data, isPending, error, status, refetch } = useQuery({
-//     queryKey: ['assignmentCount', id],
-//     queryFn: async () => {
-//       const response = await fetch(
-//         `http://localhost:3000/api/assignments/count/${id}`,
-//         {
-//           headers: { authorization: `${localStorage.getItem('token')}` },
-//         }
-//       );
-//       // console.log('data hitted', id, response.json());
-//       return response.json();
-//     },
-//   });
-
-//   return { countData: data, countRefetch: refetch };
-// }
 export function useAllUsers() {
   const { data, isPending, error, status, refetch } = useQuery({
     queryKey: ['users'],

@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import axios from 'axios';
-import { useAssignments } from '../Routes/TanstackProvider';
+import { useAssignments, useCourseStat } from '../Routes/TanstackProvider';
 function MyClassTeacher() {
   const { id } = useParams();
   const [assignment, setAssignment] = useState([]);
+  const [courseStat, setCourseStat] = useState([]);
   const { data } = useAssignments(id);
-  // const { countData } = useAssignmentCount(id);
-  console.log();
+  const { stats, statsRefetch } = useCourseStat(id);
   useEffect(() => {
     if (Array.isArray(data)) setAssignment(data);
   }, [data]);
+  useEffect(() => {
+    // statsRefetch();
+    if (typeof stats === 'object' && !Array.isArray(stats) && stats !== null) {
+      setCourseStat(stats);
+    }
+  }, [stats]);
+  console.log(courseStat);
   const navigate = useNavigate();
   const {
     register,
@@ -56,22 +63,28 @@ function MyClassTeacher() {
         </nav>
         <div className='flex justify-between w-3/4 mx-auto'>
           <div className='my-10 mx-auto w-full'>
-            <div className='stats stats-vertical lg:stats-horizontal shadow'>
-              <div className='stat'>
-                <div className='stat-title'>Downloads</div>
-                <div className='stat-value'>31K</div>
-              </div>
+            {courseStat ? (
+              <div className='stats stats-vertical lg:stats-horizontal shadow'>
+                <div className='stat'>
+                  <div className='stat-title'>Enrolls</div>
+                  <div className='stat-value'>{courseStat.enrolled}</div>
+                </div>
 
-              <div className='stat'>
-                <div className='stat-title'>New Users</div>
-                <div className='stat-value'>4,200</div>
-              </div>
+                <div className='stat'>
+                  <div className='stat-title'>total Assignments</div>
+                  <div className='stat-value'>{courseStat.totalAssignment}</div>
+                </div>
 
-              <div className='stat'>
-                <div className='stat-title'>New Registers</div>
-                <div className='stat-value'>1,200</div>
+                <div className='stat'>
+                  <div className='stat-title'> Assignment Submitted</div>
+                  <div className='stat-value'>
+                    {courseStat.assignmentSubmitted}
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <h1>Loading...</h1>
+            )}
           </div>
         </div>
         <div>

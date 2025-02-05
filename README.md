@@ -4,7 +4,7 @@
 A full-stack educational management platform where students and teachers can interact. Students can sign up, apply to become teachers, create and manage courses, and submit assignments. Teachers can create assignments, review submissions, and manage students. The platform provides dedicated dashboards for students, teachers, and admins.  
 
 ## 🔗 Live Project  
-[eduManage Live](https://age-c8e12.web.app)  
+[eduManage Live](https://edumanage-c8e12.web.app)  
 
 ## 🖼️ Screenshot  
 <div>

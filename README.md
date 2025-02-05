@@ -79,5 +79,5 @@ npm run dev
 ```  
 
 ## 🌐 Live Project & Resources  
-- **Live Demo:** [eduManage](https://age-c8e12.web.app)  
+- **Live Demo:** [eduManage](https://edumanage-c8e12.web.app)  
 

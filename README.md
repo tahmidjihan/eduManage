@@ -78,6 +78,6 @@ VITE_measurementId='your-measurement-id'
 npm run dev
 ```  
 
-## 🌐 Live Project & Resources  
-- **Live Demo:** [eduManage](https://edumanage-c8e12.web.app)  
+## 🌐 Live Link 
+- **Live Link:** [eduManage](https://edumanage-c8e12.web.app)  
 

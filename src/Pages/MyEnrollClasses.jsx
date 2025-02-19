@@ -14,6 +14,9 @@ function MyEnrollClasses() {
   return (
     <>
       <div className='container mx-auto'>
+        <h1 className='text-5xl font-extrabold text-center my-10'>
+          My Enroll Classes
+        </h1>
         <div className='overflow-x-auto mx-auto'>
           <table className='table'>
             {/* head */}

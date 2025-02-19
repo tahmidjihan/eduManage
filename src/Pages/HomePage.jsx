@@ -6,6 +6,7 @@ import { useCourses, useFeedback } from '../Routes/TanstackProvider';
 import { Carousel } from 'flowbite-react';
 import ReactStars from 'react-rating-stars-component';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 function Home() {
   const { data: courseData, isPending: courseIsPending } = useCourses();
@@ -174,7 +175,7 @@ function Home() {
               instruction and hands-on experience to help you succeed.
             </p>
           </div>
-          <div className='md:h-[60vh] h-screen overflow-hidden'>
+          <div className='md:min-h-[60vh] h-screen overflow-hidden'>
             <Carousel>
               {mostEnrolled.map((course) => (
                 <div key={course._id}>
@@ -247,7 +248,14 @@ function Home() {
                   </div>
                   <div>
                     <button
-                      type='submit'
+                      type='button'
+                      onClick={() => {
+                        Swal.fire({
+                          title: 'You have subscribed successfully',
+                          text: 'Thank you for your subscription',
+                          icon: 'success',
+                        });
+                      }}
                       className='py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'>
                       Subscribe
                     </button>
@@ -332,6 +340,68 @@ function Home() {
             </Carousel>
           </div>
         </div>
+        <section>
+          <div className='h-screen bg-gray-800'>
+            <div className='pt-10 md:pt-20'>
+              <div className='p-4 md:p-8'>
+                <h1 className='text-white text-center font-extrabold text-4xl md:text-5xl lg:text-6xl'>
+                  Contact Us
+                </h1>
+                <p className='text-gray-300 text-center font-thin pb-8'>
+                  If you have any questions or feedback, please don&apos;t
+                  <br />
+                  hesitate to contact us. you can contact us by email on{' '}
+                  <a href='#' className='text-info'>
+                    edumanage@example.com
+                  </a>
+                </p>
+                <form className='flex flex-col items-center'>
+                  <div className='md:w-3/4 lg:w-2/3 xl:w-1/2'>
+                    <div className='flex flex-col md:flex-row'>
+                      <input
+                        id='name'
+                        type='text'
+                        className='my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full md:w-1/2 md:mr-2 outline-none focus:ring-1 focus:ring-primary'
+                        placeholder='Name'
+                      />
+                      <input
+                        id='email'
+                        type='email'
+                        className='my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full md:w-1/2 md:ml-2 outline-none focus:ring-1 focus:ring-primary'
+                        placeholder='Email'
+                      />
+                    </div>
+                    <input
+                      id='subject'
+                      type='text'
+                      placeholder='Subject'
+                      className='my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full outline-none focus:ring-1 focus:ring-primary'
+                    />
+                    <textarea
+                      id='message'
+                      rows={5}
+                      placeholder='Say Something'
+                      className='my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full outline-none focus:ring-1 focus:ring-primary'
+                      defaultValue={''}
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      Swal.fire({
+                        title: 'The message sent successfully',
+                        text: 'Thank you for your feedback',
+                        icon: 'success',
+                      });
+                    }}
+                    type='button'
+                    className='btn btn-primary'>
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

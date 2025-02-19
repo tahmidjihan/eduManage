@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Generated with https://github.com/google/shaka-packager version v2.6.1-634af65-release-->
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" xmlns:cenc="urn:mpeg:cenc:2013" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" minBufferTime="PT2S" type="static" mediaPresentationDuration="PT886.8800048828125S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="audio" subsegmentAlignment="true">
+      <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="33f78dee-2176-4296-b2d1-d0eaf266f40b"/>
+      <ContentProtection schemeIdUri="urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed">
+        <cenc:pssh>AAAApHBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAAIQIARIQM/eN7iF2Qpay0dDq8mb0CxokZGU2NDZlMjQtMDNiNy00OGZlLWI4MzYtOGViNGI3MDQwNWRhIkgzMzMzNjYzNzM4NjQ2NTY1MkQzMjMxMzczNjJEMzQzMjM5MzYyRDYyMzI2NDMxMkQ2NDMwNjU2MTY2MzIzNjM2NjYzNDMwNjI=</cenc:pssh>
+      </ContentProtection>
+      <Representation id="0" bandwidth="72332" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="44100">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <BaseURL>mpd_audio.mp4</BaseURL>
+        <SegmentBase indexRange="1070-2877" timescale="44100">
+          <Initialization range="0-1069"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="video" maxWidth="1280" maxHeight="720" frameRate="12800/512" subsegmentAlignment="true" par="16:9">
+      <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="33f78dee-2176-4296-b2d1-d0eaf266f40b"/>
+      <ContentProtection schemeIdUri="urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed">
+        <cenc:pssh>AAAApHBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAAIQIARIQM/eN7iF2Qpay0dDq8mb0CxokZGU2NDZlMjQtMDNiNy00OGZlLWI4MzYtOGViNGI3MDQwNWRhIkgzMzMzNjYzNzM4NjQ2NTY1MkQzMjMxMzczNjJEMzQzMjM5MzYyRDYyMzI2NDMxMkQ2NDMwNjU2MTY2MzIzNjM2NjYzNDMwNjI=</cenc:pssh>
+      </ContentProtection>
+      <Representation id="1" bandwidth="209132" codecs="avc1.4d4028" mimeType="video/mp4" sar="640:639" width="426" height="240">
+        <BaseURL>33f78dee21764296b2d1d0eaf266f40b_240p_250k.mp4</BaseURL>
+        <SegmentBase indexRange="1131-2938" timescale="12800">
+          <Initialization range="0-1130"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="2" bandwidth="444125" codecs="avc1.4d4028" mimeType="video/mp4" sar="1:1" width="640" height="360">
+        <BaseURL>33f78dee21764296b2d1d0eaf266f40b_360p_500k.mp4</BaseURL>
+        <SegmentBase indexRange="1112-2919" timescale="12800">
+          <Initialization range="0-1111"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="3" bandwidth="733198" codecs="avc1.4d4028" mimeType="video/mp4" sar="1280:1281" width="854" height="480">
+        <BaseURL>33f78dee21764296b2d1d0eaf266f40b_480p_900k.mp4</BaseURL>
+        <SegmentBase indexRange="1132-2939" timescale="12800">
+          <Initialization range="0-1131"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="4" bandwidth="1169137" codecs="avc1.4d4028" mimeType="video/mp4" sar="1:1" width="1280" height="720">
+        <BaseURL>33f78dee21764296b2d1d0eaf266f40b_720p_1200k.mp4</BaseURL>
+        <SegmentBase indexRange="1111-2918" timescale="12800">
+          <Initialization range="0-1110"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

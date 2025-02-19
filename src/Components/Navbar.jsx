@@ -16,11 +16,6 @@ function Navbar() {
           </button>
           <ul className='menu dropdown-content bg-base-100 gap-2 rounded-box z-[1] w-52 p-2 shadow'>
             <li>
-              <Link to='/profile' className='btn btn-primary'>
-                Profile
-              </Link>
-            </li>
-            <li>
               <button className='btn btn-error' onClick={logout}>
                 Logout
               </button>
@@ -42,11 +37,27 @@ function Navbar() {
         <li>
           <Link to='/dashboard'>dashboard</Link>
         </li>
+        {user ? (
+          <>
+            <li>
+              <Link to='/profile'>Profile</Link>
+            </li>
+            <li>
+              <Link to='/beTeacher'>Be Teacher</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to='/login'>Login</Link>
+            </li>
+          </>
+        )}
       </>
     );
   }
   return (
-    <div className='navbar bg-base-100'>
+    <div className='navbar bg-base-100 px-10 fixed top-0 z-50'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <div tabIndex={0} role='button' className='btn btn-ghost lg:hidden'>

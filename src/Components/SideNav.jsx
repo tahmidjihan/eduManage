@@ -4,6 +4,7 @@ import {
   HiAcademicCap,
   HiBookOpen,
   HiChartPie,
+  HiHome,
   HiIdentification,
   HiPencilAlt,
   HiPlusCircle,
@@ -110,6 +111,14 @@ function SideNav() {
       className='w-screen md:w-64 md:h-screen'>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
+          <Sidebar.Item
+            onClick={() => {
+              navigate('/');
+            }}
+            href='#'
+            icon={HiHome}>
+            Home
+          </Sidebar.Item>
           <Sidebar.Item
             onClick={() => {
               navigate('/dashboard');

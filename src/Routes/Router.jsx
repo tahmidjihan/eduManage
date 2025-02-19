@@ -52,122 +52,98 @@ function Router() {
         <Route
           path='/dashboard'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <Dashboard />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <Dashboard />
+            </div>
           }></Route>
         <Route
           path='/profile'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <Profile />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <Profile />
+            </div>
           }></Route>
         <Route
           path='/appliedTeacher'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <MyApplyTeacher />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <MyApplyTeacher />
+            </div>
           }></Route>
         <Route
           path='/myEnrolledClasses'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <MyEnrollClasses />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <MyEnrollClasses />
+            </div>
           }></Route>
         <Route
           path='/users'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <Users />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <Users />
+            </div>
           }></Route>
         <Route
           path='/teachers'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <Teacher />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <Teacher />
+            </div>
           }></Route>
         <Route
           path='/allClasses'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <Classes />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <Classes />
+            </div>
           }></Route>
         <Route
           path='/createClass'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <UpdateClass />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <UpdateClass />
+            </div>
           }></Route>
         <Route
           path='/updateClass/:id'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <UpdateClass isUpdate />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <UpdateClass isUpdate />
+            </div>
           }></Route>
         <Route
           path='/myClass/:id'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <MyClass />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <MyClass />
+            </div>
           }></Route>
         <Route
           path='/myClassTeacher/:id'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <MyClassTeacher />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <MyClassTeacher />
+            </div>
           }></Route>
         <Route
           path='/myClasses'
           element={
-            <Layout>
-              <div className='flex gap-4 md:flex-row flex-col'>
-                <SideNav />
-                <MyClasses />
-              </div>
-            </Layout>
+            <div className='flex gap-4 md:flex-row flex-col'>
+              <SideNav />
+              <MyClasses />
+            </div>
           }></Route>
       </Routes>
     </>

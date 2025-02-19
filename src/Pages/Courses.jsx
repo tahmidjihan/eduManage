@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCourses } from '../Routes/TanstackProvider';
 import { Link } from 'react-router';
 
 function Courses() {
-  const { data: courses } = useCourses();
+  const { data } = useCourses();
+  const [courses, setCourses] = useState(data);
+  useEffect(() => {
+    setCourses(data);
+  }, [data]);
   return (
     <>
       <div className='container mx-auto'>
         <div className='my-10 flex flex-col items-center'>
           <div className='text-center mx-auto my-5'>
             <h1 className='font-extrabold text-5xl'>Courses</h1>
+          </div>
+          <div className='my-5 mx-auto flex gap-3'>
+            <div
+              className='btn btn-primary'
+              onClick={() => {
+                const sorted = [...courses].sort((a, b) => a.price - b.price);
+                setCourses(sorted);
+              }}>
+              Ascending
+            </div>
+            <div
+              className='btn btn-primary'
+              onClick={() => {
+                const sorted = [...courses].sort((a, b) => b.price - a.price);
+                setCourses(sorted);
+              }}>
+              Descending
+            </div>
           </div>
           <div className='cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
             {courses?.map((course) => (

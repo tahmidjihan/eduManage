@@ -108,44 +108,47 @@ function SideNav() {
   }
 
   return (
-    <Sidebar
-      aria-label='Default sidebar example'
-      className='w-screen md:w-64 md:h-screen'>
-      <Sidebar.Items>
-        <Sidebar.ItemGroup>
-          <Sidebar.Item
-            onClick={() => {
-              navigate('/');
-            }}
-            href='#'
-            icon={HiHome}>
-            Home
-          </Sidebar.Item>
-          <Sidebar.Item
-            onClick={() => {
-              navigate('/dashboard');
-            }}
-            href='#'
-            icon={HiChartPie}>
-            Dashboard
-          </Sidebar.Item>
-          <StudentMenu />
-          {isTeachers ? <TeacherMenu /> : ''}
-          <Sidebar.Item
-            onClick={() => {
-              navigate('/profile');
-            }}
-            icon={HiUser}>
-            Profile
-          </Sidebar.Item>
-          <Sidebar.Item icon={HiSun}>
-            <Theme />
-          </Sidebar.Item>
+    <>
+      <div className='md:w-64'></div>
+      <Sidebar
+        aria-label='Default sidebar example'
+        className='w-screen md:w-64 md:h-screen md:fixed left-0'>
+        <Sidebar.Items>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item
+              onClick={() => {
+                navigate('/');
+              }}
+              href='#'
+              icon={HiHome}>
+              Home
+            </Sidebar.Item>
+            <Sidebar.Item
+              onClick={() => {
+                navigate('/dashboard');
+              }}
+              href='#'
+              icon={HiChartPie}>
+              Dashboard
+            </Sidebar.Item>
+            <StudentMenu />
+            {isTeachers ? <TeacherMenu /> : ''}
+            <Sidebar.Item
+              onClick={() => {
+                navigate('/profile');
+              }}
+              icon={HiUser}>
+              Profile
+            </Sidebar.Item>
+            <Sidebar.Item icon={HiSun}>
+              <Theme />
+            </Sidebar.Item>
 
-          {admin == true ? <AdminMenu /> : ''}
-        </Sidebar.ItemGroup>
-      </Sidebar.Items>
-    </Sidebar>
+            {admin == true ? <AdminMenu /> : ''}
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
+    </>
   );
 }
 

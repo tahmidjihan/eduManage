@@ -8,11 +8,6 @@ function Course() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isPending, error, refetch } = useCourse(id);
-  useEffect(() => {
-    if (user === null) {
-      navigate('/login');
-    }
-  }, [user]);
   return (
     <>
       <div className='container mx-auto'>

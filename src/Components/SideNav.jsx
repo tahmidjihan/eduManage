@@ -8,12 +8,14 @@ import {
   HiIdentification,
   HiPencilAlt,
   HiPlusCircle,
+  HiSun,
   HiUser,
   HiUsers,
 } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../Routes/AuthProvider';
 import Teacher from './../Pages/Teacher';
+import Theme from './Theme';
 
 function SideNav() {
   const navigate = useNavigate();
@@ -135,6 +137,9 @@ function SideNav() {
             }}
             icon={HiUser}>
             Profile
+          </Sidebar.Item>
+          <Sidebar.Item icon={HiSun}>
+            <Theme />
           </Sidebar.Item>
 
           {admin == true ? <AdminMenu /> : ''}

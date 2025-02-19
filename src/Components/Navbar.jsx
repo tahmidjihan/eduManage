@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '../Routes/AuthProvider';
 import Profile from './../Pages/Profile';
+import Theme from './Theme';
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -15,6 +16,10 @@ function Navbar() {
             </div>
           </button>
           <ul className='menu dropdown-content bg-base-100 gap-2 rounded-box z-[1] w-52 p-2 shadow'>
+            <li className='flex gap-2 flex-row'>
+              <p>Mode:</p>
+              <Theme />
+            </li>
             <li>
               <button className='btn btn-error' onClick={logout}>
                 Logout
@@ -44,7 +49,7 @@ function Navbar() {
               <Link to='/profile'>Profile</Link>
             </li>
             <li>
-              <Link to='/beTeacher'>Be Teacher</Link>
+              <Link to='/myEnrolledClasses'>My enrolled</Link>
             </li>
           </>
         ) : (

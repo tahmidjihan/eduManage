@@ -110,18 +110,16 @@ function Home() {
         <HeroCarousel></HeroCarousel>
         <div className='py-10 relative'>
           <h1 className='text-center font-extrabold text-5xl my-5'>
-            Our Partner
+            Our Partners
           </h1>
-          <p className='text-center font-thin text-gray-600 max-w-md mx-auto'>
+          <p className='text-center font-thin text-gray-500 max-w-md mx-auto'>
             EduManage is proud to partner with leading universities and
-            educational institutions to enhance the learning experience. These
-            collaborations allow us to offer cutting-edge solutions that
-            streamline education management, improve communication, and support
-            both teachers and students. Together, we are shaping the future of
-            education and fostering a more efficient and connected academic
-            community
+            educational institutions to enhance the learning experience.
           </p>
-          <div ref={sliderRef} className='keen-slider my-10'>
+          <div
+            ref={sliderRef}
+            className='keen-slider py-8 my-2 mt-4 bg-gray-300'
+            data-theme='light'>
             {images.map((image) => (
               <div key={image.id} className='keen-slider__slide'>
                 <img
@@ -133,12 +131,40 @@ function Home() {
             ))}
           </div>
         </div>
+        <section>
+          <div className='sm:flex items-center max-w-screen-xl container mx-auto'>
+            <div className='sm:w-1/2 p-10'>
+              <div className='image object-center text-center'>
+                <img src='https://i.imgur.com/WbQnbas.png' />
+              </div>
+            </div>
+            <div className='sm:w-1/2 p-5'>
+              <div className='text'>
+                <span className=' border-b-2 border-primary uppercase'>
+                  About us
+                </span>
+                <h2 className='my-4 font-bold text-3xl  sm:text-4xl '>
+                  About <span className='text-primary'>Our Company</span>
+                </h2>
+                <p className='text-gray-500'>
+                  Welcome to EduManage, your one-stop destination for
+                  exceptional educational resources. Our platform connects
+                  learners with a wide range of courses, tutorials, and
+                  educational materials. Whether you're a student, a teacher, or
+                  an educator, EduManage has got you covered. Our user-friendly
+                  interface ensures a smooth learning experience, while our
+                  expert instructors provide personalized guidance to help you
+                  achieve your educational goals. Join our community of learners
+                  and take your learning to the next level.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
         <div className='relative py-10'>
           <div className='mx-auto text-center py-5'>
-            <h1 className='text-5xl font-extrabold text-gray-900'>
-              Most Enrolled Courses
-            </h1>
-            <p className='text-center font-thin text-gray-600 max-w-md mx-auto'>
+            <h1 className='text-5xl font-extrabold'>Most Enrolled Courses</h1>
+            <p className='text-center font-thin text-gray-500 max-w-md mx-auto'>
               Explore the most popular and highly enrolled courses that are
               shaping the future of education. These programs have attracted
               thousands of learners who are eager to gain practical skills,
@@ -267,10 +293,9 @@ function Home() {
         </div>
         <div className='relative py-10'>
           <div className='mx-auto text-center py-5'>
-            <h1 className='text-5xl font-extrabold text-gray-900'>
+            <h1 className='text-5xl font-extrabold pr-10'>
               Testimonials and Feedbacks
             </h1>
-            <p className='text-center font-thin text-gray-600 max-w-md mx-auto'></p>
           </div>
           <div className='md:h-[60vh] h-screen overflow-hidden'>
             <Carousel>
